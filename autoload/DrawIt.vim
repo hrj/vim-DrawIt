@@ -3,8 +3,8 @@
 " Maintainer:	Charles E. Campbell
 " Authors:		Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz> - NOSPAM
 "   			Sylvain Viart (molo@multimania.com)
-" Version:		14c	ASTRO-ONLY
-" Date:			Oct 24, 2014
+" Version:		14h	ASTRO-ONLY
+" Date:			Dec 09, 2015
 "
 " Quick Setup: {{{1
 "              tar -oxvf DrawIt.tar
@@ -41,7 +41,7 @@
 if &cp || exists("g:loaded_DrawIt")
  finish
 endif
-let g:loaded_DrawIt= "v14c"
+let g:loaded_DrawIt= "v14h"
 if v:version < 700
  echohl WarningMsg
  echo "***warning*** this version of DrawIt needs vim 7.0"
@@ -255,7 +255,7 @@ fun! DrawIt#DrawItStart(...)
   call SaveUserMaps("bn","","><^v","DrawIt")
   call SaveUserMaps("bv",usermaplead,"abceflsy","DrawIt")
   call SaveUserMaps("bn","","<c-v>","DrawIt")
-  call SaveUserMaps("bn",usermaplead,"h><v^","DrawIt")
+  call SaveUserMaps("bn",usermaplead,"cgh><v^","DrawIt")
   call SaveUserMaps("bn","","<left>","DrawIt")
   call SaveUserMaps("bn","","<right>","DrawIt")
   call SaveUserMaps("bn","","<up>","DrawIt")
@@ -354,77 +354,78 @@ fun! DrawIt#DrawItStart(...)
   call SaveUserMaps("bn","",":\<c-v>","DrawIt")
 
   " DrawItStart: DrawIt maps (Charles Campbell) {{{3
-  nmap <silent> <buffer> <script> <left>		:set lz<CR>:silent! call <SID>DrawLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <right>		:set lz<CR>:silent! call <SID>DrawRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <up>			:set lz<CR>:silent! call <SID>DrawUp()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <down>		:set lz<CR>:silent! call <SID>DrawDown()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-left>		:set lz<CR>:silent! call <SID>MoveLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-right>		:set lz<CR>:silent! call <SID>MoveRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-up>		:set lz<CR>:silent! call <SID>MoveUp()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-down>		:set lz<CR>:silent! call <SID>MoveDown()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <space>		:set lz<CR>:silent! call <SID>DrawErase()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> >				:set lz<CR>:silent! call <SID>DrawSpace('>',1)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <				:set lz<CR>:silent! call <SID>DrawSpace('<',2)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> ^				:set lz<CR>:silent! call <SID>DrawSpace('^',3)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> v				:set lz<CR>:silent! call <SID>DrawSpace('v',4)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <home>		:set lz<CR>:silent! call <SID>DrawSlantUpLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <end>			:set lz<CR>:silent! call <SID>DrawSlantDownLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <pageup>		:set lz<CR>:silent! call <SID>DrawSlantUpRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <pagedown>	:set lz<CR>:silent! call <SID>DrawSlantDownRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>>		:set lz<CR>:silent! call <SID>DrawFatRArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader><		:set lz<CR>:silent! call <SID>DrawFatLArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>^		:set lz<CR>:silent! call <SID>DrawFatUArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>v		:set lz<CR>:silent! call <SID>DrawFatDArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>f		:call <SID>Flood()<cr>
+  nmap <silent> <buffer> <script> <nowait> <left>		:set lz<CR>:silent! call <SID>DrawLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <right>		:set lz<CR>:silent! call <SID>DrawRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <up>			:set lz<CR>:silent! call <SID>DrawUp()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <down>		:set lz<CR>:silent! call <SID>DrawDown()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-left>		:set lz<CR>:silent! call <SID>MoveLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-right>	:set lz<CR>:silent! call <SID>MoveRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-up>		:set lz<CR>:silent! call <SID>MoveUp()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-down>		:set lz<CR>:silent! call <SID>MoveDown()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <space>		:set lz<CR>:silent! call <SID>DrawErase()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> >			:set lz<CR>:silent! call <SID>DrawSpace('>',1)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <			:set lz<CR>:silent! call <SID>DrawSpace('<',2)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> ^			:set lz<CR>:silent! call <SID>DrawSpace('^',3)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> v			:set lz<CR>:silent! call <SID>DrawSpace('v',4)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <home>		:set lz<CR>:silent! call <SID>DrawSlantUpLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <end>		:set lz<CR>:silent! call <SID>DrawSlantDownLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <pageup>		:set lz<CR>:silent! call <SID>DrawSlantUpRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <pagedown>	:set lz<CR>:silent! call <SID>DrawSlantDownRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>>	:set lz<CR>:silent! call <SID>DrawFatRArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader><	:set lz<CR>:silent! call <SID>DrawFatLArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>^	:set lz<CR>:silent! call <SID>DrawFatUArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>v	:set lz<CR>:silent! call <SID>DrawFatDArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>f	:call <SID>Flood()<cr>
+  nmap <silent> <buffer> <script> <nowait> <Leader>g	:call <SID>ToggleGrid()<cr>
 
   " DrawItStart: Set up insertmode maps {{{3
   if exists("g:drawit_insertmode") && g:drawit_insertmode
-   imap <silent> <buffer> <script> <left>     <Esc><left>a
-   imap <silent> <buffer> <script> <right>    <Esc><right>a
-   imap <silent> <buffer> <script> <up>       <Esc><up>a
-   imap <silent> <buffer> <script> <down>     <Esc><down>a
-   imap <silent> <buffer> <script> <left>     <Esc><left>a
-   imap <silent> <buffer> <script> <s-right>  <Esc><s-right>a
-   imap <silent> <buffer> <script> <s-up>     <Esc><s-up>a
-   imap <silent> <buffer> <script> <s-down>   <Esc><s-down>a
-   imap <silent> <buffer> <script> <home>     <Esc><home>a
-   imap <silent> <buffer> <script> <end>      <Esc><end>a
-   imap <silent> <buffer> <script> <pageup>   <Esc><pageup>a
-   imap <silent> <buffer> <script> <pagedown> <Esc><pagedown>a
+   imap <silent> <buffer> <script> <nowait> <left>     <Esc><left>a
+   imap <silent> <buffer> <script> <nowait> <right>    <Esc><right>a
+   imap <silent> <buffer> <script> <nowait> <up>       <Esc><up>a
+   imap <silent> <buffer> <script> <nowait> <down>     <Esc><down>a
+   imap <silent> <buffer> <script> <nowait> <left>     <Esc><left>a
+   imap <silent> <buffer> <script> <nowait> <s-right>  <Esc><s-right>a
+   imap <silent> <buffer> <script> <nowait> <s-up>     <Esc><s-up>a
+   imap <silent> <buffer> <script> <nowait> <s-down>   <Esc><s-down>a
+   imap <silent> <buffer> <script> <nowait> <home>     <Esc><home>a
+   imap <silent> <buffer> <script> <nowait> <end>      <Esc><end>a
+   imap <silent> <buffer> <script> <nowait> <pageup>   <Esc><pageup>a
+   imap <silent> <buffer> <script> <nowait> <pagedown> <Esc><pagedown>a
   endif
 
   " DrawItStart: set up drawing mode mappings (Sylvain Viart) {{{3
-  nnoremap <silent> <buffer> <script> <c-v>      :call <SID>LeftStart()<CR><c-v>
-  vmap     <silent> <buffer> <script> <Leader>a  :<c-u>call <SID>CallBox('Arrow')<CR>
-  vmap     <silent> <buffer> <script> <Leader>b  :<c-u>call <SID>CallBox('DrawBox')<cr>
-  nmap              <buffer> <script> <Leader>c  :call <SID>Canvas()<cr>
-  vmap     <silent> <buffer> <script> <Leader>l  :<c-u>call <SID>CallBox('DrawPlainLine')<CR>
-  vmap     <silent> <buffer> <script> <Leader>s  :<c-u>call <SID>Spacer(line("'<"), line("'>"),0)<cr>
+  nnoremap <silent> <buffer> <script> <nowait> <c-v>      :call <SID>LeftStart()<CR><c-v>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>a  :<c-u>call <SID>CallBox('Arrow')<CR>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>b  :<c-u>call <SID>CallBox('DrawBox')<cr>
+  nmap              <buffer> <script> <nowait> <Leader>c  :call <SID>Canvas()<cr>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>l  :<c-u>call <SID>CallBox('DrawPlainLine')<CR>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>s  :<c-u>call <SID>Spacer(line("'<"), line("'>"),0)<cr>
 
   " DrawItStart: set up drawing mode mappings (Charles Campbell) {{{3
   " \pa ... \pz : blanks are transparent
   " \ra ... \rz : blanks copy over
-  vmap <buffer> <silent> <Leader>e   :<c-u>call <SID>CallBox('DrawEllipse')<CR>
+  vmap <buffer> <silent> <nowait> <Leader>e   :<c-u>call <SID>CallBox('DrawEllipse')<CR>
   
   let allreg= "abcdefghijklmnopqrstuvwxyz"
   while strlen(allreg) > 0
    let ireg= strpart(allreg,0,1)
-   exe "nmap <silent> <buffer> <Leader>p".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",0)<cr>:set nolz<cr>'
-   exe "nmap <silent> <buffer> <Leader>r".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",1)<cr>:set nolz<cr>'
+   exe "nmap <silent> <buffer> <nowait> <Leader>p".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",0)<cr>:set nolz<cr>'
+   exe "nmap <silent> <buffer> <nowait> <Leader>r".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",1)<cr>:set nolz<cr>'
    let allreg= strpart(allreg,1)
   endwhile
 
   " DrawItStart: mouse maps  (Sylvain Viart) {{{3
   " start visual-block with leftmouse
-  nnoremap <silent> <buffer> <script> <leftmouse>    <leftmouse>:call <SID>LeftStart()<CR><c-v>
-  vnoremap <silent> <buffer> <script> <rightmouse>   <leftmouse>:<c-u>call <SID>RightStart(1)<cr>
-  vnoremap <silent> <buffer> <script> <middlemouse>  <leftmouse>:<c-u>call <SID>RightStart(0)<cr>
-  vnoremap <silent> <buffer> <script> <c-leftmouse>  <leftmouse>:<c-u>call <SID>CLeftStart()<cr>
+  nnoremap <silent> <buffer> <script> <nowait> <leftmouse>    <leftmouse>:call <SID>LeftStart()<CR><c-v>
+  vnoremap <silent> <buffer> <script> <nowait> <rightmouse>   <leftmouse>:<c-u>call <SID>RightStart(1)<cr>
+  vnoremap <silent> <buffer> <script> <nowait> <middlemouse>  <leftmouse>:<c-u>call <SID>RightStart(0)<cr>
+  vnoremap <silent> <buffer> <script> <nowait> <c-leftmouse>  <leftmouse>:<c-u>call <SID>CLeftStart()<cr>
 
   " DrawItStart: mouse maps (Charles Campbell) {{{3
   " Draw with current brush
-  nnoremap <silent> <buffer> <script> <s-leftmouse>  <leftmouse>:call <SID>SLeftStart()<CR><c-v>
-  nnoremap <silent> <buffer> <script> <c-leftmouse>  <leftmouse>:call <SID>CLeftStart()<CR><c-v>
+  nnoremap <silent> <buffer> <script> <nowait> <s-leftmouse>  <leftmouse>:call <SID>SLeftStart()<CR><c-v>
+  nnoremap <silent> <buffer> <script> <nowait> <c-leftmouse>  <leftmouse>:call <SID>CLeftStart()<CR><c-v>
 
  " DrawItStart: Menu support {{{3
  if has("gui_running") && has("menu") && &go =~# 'm'
@@ -452,6 +453,8 @@ com! -nargs=0 -range	DIcircle	call s:CallBox('DrawEllipse')
 com! -nargs=0 -range	DIflood     call s:Flood()
 com! -nargs=0 -range	DIline      call s:CallBox('DrawPlainLine')
 com! -nargs=0 -range	DIspacer	call s:Spacer(line("'<"), line("'>"),0)
+com! -nargs=*			DIgrid		call s:ToggleGrid(<f-args>)
+com! -nargs=*			DIoff		call DrawIt#DrawItStop()
 " call Dret("DrawItStart")
 endfun
 
@@ -489,7 +492,7 @@ fun! DrawIt#DrawItStop()
   " DrawItStop: insure that erase mode is off {{{3
   " (thanks go to Gary Johnson for this)
   if b:di_erase == 1
-  	call s:DrawErase()
+    call s:DrawErase()
   endif
 
   " DrawItStop: restore user map(s), if any {{{3
@@ -988,104 +991,116 @@ fun! s:DrawCorner()
   else
    let cdown= " "
   endif
-"  call Decho("ctr<".ctr."> cup<".cup."> cright<".cright."> cdown<".cdown."> cleft<".cleft.">")
+"  call Decho("ctr<".ctr."> cup<".cup."> cleft<".cleft."> cdown<".cdown."> cright<".cright.">")
   " - MIXED SINGLE-DOUBLE CORNERS ----------------------------------------
   "   ┼═   ╬═      ╒═
   "   │    │       │
-  if  !s:IsDnS(cup)
+  if  !s:IsDnS(cup)      && !s:IsDnD(cup)
  \ &&  s:IsLeftD(cright)
  \ &&  s:IsUpS(cdown)
- \ && !s:IsRightD(cleft)
+ \ && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"   call Decho("case 1: !DnS && LeftD && UpS && !RightD")
    exe "norm! r".b:di_cSdDr
 
   "   ┼─   ╬─      ╓─
   "   ║    ║       ║
-  elseif  !s:IsDnD(cup)
+  elseif  !s:IsDnD(cup) && !s:IsDnS(cup)
  \ &&      s:IsLeftS(cright)
  \ &&      s:IsUpD(cdown)
- \ &&     !s:IsRightS(cleft)
+ \ &&     !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"   call Decho("case 2: !DnD && LeftD && UpD && !RightS")
    exe "norm! r".b:di_cDdSr
 
   "  ═┼   ═╬      ═╕
   "   │    │       │
-  elseif  !s:IsDnS(cup)
- \ &&     !s:IsLeftD(cright)
+  elseif  !s:IsDnS(cup)      && !s:IsDnD(cup)
+ \ &&     !s:IsLeftD(cright) && !s:IsLeftS(cright)
  \ &&      s:IsUpS(cdown)
  \ &&      s:IsRightD(cleft)
+"   call Decho("case 3: !DnS && !LeftD && UpS && RightD")
    exe "norm! r".b:di_cDlSd
 
   "  ─┼   ─╬      ─╖
   "   ║    ║       ║
-  elseif  !s:IsDnD(cup)
- \ &&     !s:IsLeftS(cright)
+  elseif  !s:IsDnD(cup)      && !s:IsDnS(cup)
+ \ &&     !s:IsLeftS(cright) && !s:IsLeftD(cright)
  \ &&      s:IsUpD(cdown)
  \ &&      s:IsRightS(cleft)
+"   call Decho("case 4: !DnD && !LeftS && UpD && RightS")
    exe "norm! r".b:di_cSlDd
 
   "   │    │       │
   "   ┼═   ╬═      ╘═
   elseif   s:IsDnS(cup)
  \ &&      s:IsLeftD(cright)
- \ &&     !s:IsUpS(cdown)
- \ &&     !s:IsRightD(cleft)
+ \ &&     !s:IsUpS(cdown)    && !s:IsUpD(cdown)
+ \ &&     !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"   call Decho("case 5: DnS && LeftD && !UpS && !RightD")
    exe "norm! r".b:di_cDrSu
 
   "   ║    ║       ║
   "   ┼─   ╬─      ╙─
   elseif   s:IsDnD(cup)
  \ &&      s:IsLeftS(cright)
- \ &&     !s:IsUpD(cdown)
- \ &&     !s:IsRightS(cleft)
+ \ &&     !s:IsUpD(cdown)    && !s:IsUpS(cdown)
+ \ &&     !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"   call Decho("case 6: DnD && LeftS && !UpD && !RightS")
    exe "norm! r".b:di_cSrDu
 
   "   │    │       │
   "  ═┼   ═╬      ═╛
   elseif   s:IsDnS(cup)
- \ &&     !s:IsLeftD(cright)
- \ &&     !s:IsUpS(cdown)
+ \ &&     !s:IsLeftD(cright) && !s:IsLeftS(cright)
+ \ &&     !s:IsUpS(cdown)    && !s:IsUpD(cdown)
  \ &&      s:IsRightD(cleft)
+"   call Decho("case 7: DnS && !LeftD && !UpS &&  RightD")
    exe "norm! r".b:di_cDlSu
 
   "   ║    ║       ║
   "  ─┼   ─╬      ─╜
   elseif   s:IsDnD(cup)
- \ &&     !s:IsLeftS(cright)
- \ &&     !s:IsUpD(cdown)
+ \ &&     !s:IsLeftS(cright) && !s:IsLeftD(cright)
+ \ &&     !s:IsUpD(cdown)    && !s:IsUpS(cdown)
  \ &&      s:IsRightS(cleft)
+"   call Decho("case 8: DnD && !LeftS && !UpD &&  RightS")
    exe "norm! r".b:di_cSlDu
 
   " - SINGLE LINE --------------------------------------------------------
  elseif ctr == b:di_Splus
    "   ─┼  ─┐
    "    │   │
-   if  !s:IsDnS(cup)
-  \ && !s:IsLeftS(cright)
+   if  !s:IsDnS(cup)      && !s:IsDnD(cup)
+  \ && !s:IsLeftS(cright) && !s:IsLeftD(cright)
   \ &&  s:IsUpS(cdown)
   \ &&  s:IsRightS(cleft)
+"    call Decho("case 9: !DnS && !LeftS && UpS &&  RightS")
     exe "norm! r".b:di_Surcorn
 
    "    ┼─  ┌─
    "    │   │
-   elseif !s:IsDnS(cup)
+   elseif !s:IsDnS(cup)      && !s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpS(cdown)
-  \    && !s:IsRightS(cleft)
+  \    && !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"    call Decho("case 10: !DnS && LeftS && UpS &&  !RightS")
     exe "norm! r".b:di_Sulcorn
 
    "    │   │
    "   ─┼  ─┘
    elseif  s:IsDnS(cup)
-  \    && !s:IsLeftS(cright)
-  \    && !s:IsUpS(cdown)
+  \    && !s:IsLeftS(cright) && !s:IsLeftD(cright)
+  \    && !s:IsUpS(cdown)    && !s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 11: DnS && !LeftS && !UpS && RightS")
     exe "norm! r".b:di_Slrcorn
 
    "   │   │
    "   ┼─  └─
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftS(cright)
-  \    && !s:IsUpS(cdown)
-  \    && !s:IsRightS(cleft)
+  \    && !s:IsUpS(cdown)    && !s:IsUpD(cdown)
+  \    && !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"    call Decho("case 12: DnS && LeftS && !UpS && !RightS")
     exe "norm! r".b:di_Sllcorn
 
    "   │   │
@@ -1094,48 +1109,54 @@ fun! s:DrawCorner()
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpS(cdown)
-  \    && !s:IsRightS(cleft)
+  \    && !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"    call Decho("case 13: DnS && LeftS && UpS && !RightS")
     exe "norm! r".b:di_Srplus
 
    "   │   │
    "  ─┼  ─┤
    "   │   │
    elseif  s:IsDnS(cup)
-  \    && !s:IsLeftS(cright)
+  \    && !s:IsLeftS(cright) && !s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 14: DnS && !LeftS && UpS && RightS")
     exe "norm! r".b:di_Slplus
 
    "  ─┼─   ─┬─
    "   │     │ 
-   elseif !s:IsDnS(cup)
+   elseif !s:IsDnS(cup) && !s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 15: !DnS && LeftS && UpS && RightS")
 	exe "norm! r".b:di_Sdnplus
 
    "  ─┼─   ─╥─
    "   ║     ║ 
-   elseif !s:IsDnD(cup)
+   elseif !s:IsDnD(cup) && !s:IsDnS(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 16: !DnD && LeftS && UpD && RightS")
 	exe "norm! r".b:di_ShDd
 
    "   ║     ║ 
    "  ─┼─   ─╨─
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
-  \    && !s:IsUpD(cdown)
+  \    && !s:IsUpD(cdown) && !s:IsUpS(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 17: DnD && LeftS && !UpD && RightS")
 	exe "norm! r".b:di_ShDu
 
    "   │     │ 
    "  ─┼─   ─┴─
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftS(cright)
-  \    && !s:IsUpS(cdown)
+  \    && !s:IsUpS(cdown) && !s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 18: DnS && LeftS && !UpS && RightS")
 	exe "norm! r".b:di_Supplus
 
    "   ║     ║ 
@@ -1144,16 +1165,18 @@ fun! s:DrawCorner()
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
-  \    && !s:IsRightS(cleft)
+  \    && !s:IsRightS(cleft) && !s:IsRightD(cleft)
+"    call Decho("case 19: DnD && LeftS && UpD && !RightS")
 	exe "norm! r".b:di_DuSr
 
    "   ║     ║ 
    "  ─┼    ─╢
    "   ║     ║ 
    elseif  s:IsDnD(cup)
-  \    && !s:IsLeftS(cright)
+  \    && !s:IsLeftS(cright) && !s:IsLeftD(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 20: DnD && !LeftS && UpD && RightS")
 	exe "norm! r".b:di_DuSl
 
    "   │   │
@@ -1162,32 +1185,36 @@ fun! s:DrawCorner()
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 21: DnS && LeftD && UpS && !RightD")
     exe "norm! r".b:di_SuDr
 
    "   │   │
    "  ═┼  ═╡
    "   │   │
    elseif  s:IsDnS(cup)
-  \    && !s:IsLeftD(cright)
+  \    && !s:IsLeftD(cright) && !s:IsLeftS(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 22: DnS && !LeftD && UpS && RightD")
     exe "norm! r".b:di_SuDl
 
    "  ═┼═   ═╤═
    "   │     │ 
-   elseif !s:IsDnS(cup)
+   elseif !s:IsDnS(cup) && !s:IsDnD(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 23: !DnS && LeftD && UpS && RightD")
 	exe "norm! r".b:di_DhSd
 
    "   │     │ 
    "  ═┼═   ═╧═
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
-  \    && !s:IsUpS(cdown)
+  \    && !s:IsUpS(cdown) && !s:IsUpD(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 24: DnS && LeftD && !UpS && RightD")
 	exe "norm! r".b:di_DhSu
 
    "   ║     ║ 
@@ -1197,6 +1224,7 @@ fun! s:DrawCorner()
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 25: DnD && LeftS && UpD && RightS")
 	exe "norm! r".b:di_DuSlr
 
    "   │     │ 
@@ -1206,6 +1234,7 @@ fun! s:DrawCorner()
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 26: DnS && LeftD && UpS && RightD")
 	exe "norm! r".b:di_SuDlr
    endif
 
@@ -1213,34 +1242,38 @@ fun! s:DrawCorner()
   elseif ctr == b:di_Dplus
    "   ═╬  ═╗
    "    ║   ║
-   if  !s:IsDnD(cup)
-  \ && !s:IsLeftD(cright)
+   if  !s:IsDnD(cup)      && !s:IsDnS(cup)
+  \ && !s:IsLeftD(cright) && !s:IsLeftS(cright)
   \ &&  s:IsUpD(cdown)
   \ &&  s:IsRightD(cleft)
+"    call Decho("case 27: !DnD && !LeftD && UpD && RightD")
     exe "norm! r".b:di_Durcorn
 
    "    ╬═  ╔═
    "    ║   ║
-   elseif !s:IsDnD(cup)
+   elseif !s:IsDnD(cup)      && !s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpD(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 28: !DnD && LeftD && UpD && !RightD")
     exe "norm! r".b:di_Dulcorn
 
    "    ║   ║
    "   ═╬  ═╝
    elseif  s:IsDnD(cup)
-  \    && !s:IsLeftD(cright)
-  \    && !s:IsUpD(cdown)
+  \    && !s:IsLeftD(cright) && !s:IsLeftS(cright)
+  \    && !s:IsUpD(cdown)    && !s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 29: DnD && !LeftD && !UpD && !RightD")
     exe "norm! r".b:di_Dlrcorn
 
    "   ║   ║
    "   ╬═  ╚═
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftD(cright)
-  \    && !s:IsUpD(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsUpD(cdown)    && !s:IsUpS(cdown)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 30: DnD && LeftD && !UpD && !RightD")
     exe "norm! r".b:di_Dllcorn
 
    "   ║   ║
@@ -1249,25 +1282,28 @@ fun! s:DrawCorner()
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpD(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 31: DnD && LeftD && UpD && !RightD")
     exe "norm! r".b:di_Drplus
 
    "   ║   ║
    "  ═╬  ═╣
    "   ║   ║
    elseif  s:IsDnD(cup)
-  \    && !s:IsLeftD(cright)
+  \    && !s:IsLeftD(cright) && !s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 32: DnD && !LeftD && UpD && RightD")
     exe "norm! r".b:di_Dlplus
 
    "   ║   ║
    "  ─╬  ─╢
    "   ║   ║
    elseif  s:IsDnD(cup)
-  \    && !s:IsLeftD(cright)
+  \    && !s:IsLeftD(cright) && !s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 33: DnD && !LeftD && UpD && RightS")
     exe "norm! r".b:di_DuSl
 
    "   ║   ║
@@ -1276,23 +1312,26 @@ fun! s:DrawCorner()
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 34: DnD && LeftS && UpD && !RightD")
     exe "norm! r".b:di_DuSr
 
    "  ═╬═   ═╦═
    "   ║     ║ 
-   elseif !s:IsDnD(cup)
+   elseif !s:IsDnD(cup) && !s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 35: !DnD && LeftD && UpD && RightD")
 	exe "norm! r".b:di_Ddnplus
 
    "   ║     ║ 
    "  ═╬═   ═╩═
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftD(cright)
-  \    && !s:IsUpD(cdown)
+  \    && !s:IsUpD(cdown) && !s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 36: DnD && LeftD && !UpD && RightD")
 	exe "norm! r".b:di_Dupplus
 
    "   │     │ 
@@ -1301,32 +1340,36 @@ fun! s:DrawCorner()
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
-  \    && !s:IsRightD(cleft)
+  \    && !s:IsRightD(cleft) && !s:IsRightS(cleft)
+"    call Decho("case 37: DnS && LeftD && UpS && !RightD")
 	exe "norm! r".b:di_SuDr
 
    "   │     │ 
    "  ═╬    ═╡
    "   │     │ 
    elseif  s:IsDnS(cup)
-  \    && !s:IsLeftD(cright)
+  \    && !s:IsLeftD(cright) && !s:IsLeftS(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 38: DnS && !LeftD && UpS && RightD")
 	exe "norm! r".b:di_SuDl
 
    "  ─╬─   ─╥─
    "   ║     ║ 
-   elseif !s:IsDnD(cup)
+   elseif !s:IsDnD(cup) && !s:IsDnS(cup)
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 39: !DnD && LeftS && UpD && RightS")
 	exe "norm! r".b:di_ShDd
 
    "   ║     ║ 
    "  ─╬─   ─╨─
    elseif  s:IsDnD(cup)
   \    &&  s:IsLeftS(cright)
-  \    && !s:IsUpD(cdown)
+  \    && !s:IsUpD(cdown) && !s:IsUpS(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 40: DnD && LeftS && !UpD && RightS")
 	exe "norm! r".b:di_ShDu
 
    "   │     │ 
@@ -1336,22 +1379,25 @@ fun! s:DrawCorner()
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 41: DnS && LeftD && UpS && RightD")
 	exe "norm! r".b:di_SuDlr
 
    "   │     │ 
    "  ═╬═   ═╨═
    elseif  s:IsDnS(cup)
   \    &&  s:IsLeftD(cright)
-  \    && !s:IsUpS(cdown)
+  \    && !s:IsUpS(cdown) && !s:IsUpD(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 42: DnS && LeftD && !UpS && RightD")
     exe "norm! r".b:di_SuDh
 
    "  ═╬═   ═╤═
    "   │     │ 
-   elseif !s:IsDnS(cup)
+   elseif !s:IsDnS(cup) && !s:IsDnD(cup)
   \    &&  s:IsLeftD(cright)
   \    &&  s:IsUpS(cdown)
   \    &&  s:IsRightD(cleft)
+"    call Decho("case 43: !DnS && LeftD && UpS && RightD")
     exe "norm! r".b:di_SdDh
 
    "   ║     ║ 
@@ -1361,6 +1407,7 @@ fun! s:DrawCorner()
   \    &&  s:IsLeftS(cright)
   \    &&  s:IsUpD(cdown)
   \    &&  s:IsRightS(cleft)
+"    call Decho("case 44: DnD && LeftD && UpS && RightD")
 	exe "norm! r".b:di_DuSlr
    endif
 
@@ -1459,19 +1506,19 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsDnS: does the character "chr" have a single-line vertical-down? {{{2
 fun! s:IsDnS(chr)
-"  call Dfunc("s:IsDnS(chr<".a:chr.">)")
+"  call Dfunc("s:IsDnS(chr<".a:chr.">) does chr have a sngl-line vert-down?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Svert  |let ret= 1
-   elseif a:chr == b:di_Sulcorn|let ret= 1
-   elseif a:chr == b:di_Surcorn|let ret= 1
-   elseif a:chr == b:di_Splus  |let ret= 1
-   elseif a:chr == b:di_Sdnplus|let ret= 1
-   elseif a:chr == b:di_Slplus |let ret= 1
-   elseif a:chr == b:di_Srplus |let ret= 1
-   elseif a:chr == b:di_SdDh   |let ret= 1
-   elseif a:chr == b:di_cDlSd  |let ret= 1
-   elseif a:chr == b:di_cSdDr  |let ret= 1
+   if     a:chr == b:di_Svert  |let ret= 1  "│
+   elseif a:chr == b:di_Sulcorn|let ret= 1  "┌
+   elseif a:chr == b:di_Surcorn|let ret= 1  "┐
+   elseif a:chr == b:di_Splus  |let ret= 1  "┼
+   elseif a:chr == b:di_Sdnplus|let ret= 1  "┬
+   elseif a:chr == b:di_Slplus |let ret= 1  "┤
+   elseif a:chr == b:di_Srplus |let ret= 1  "├
+   elseif a:chr == b:di_SdDh   |let ret= 1  "╤
+   elseif a:chr == b:di_cDlSd  |let ret= 1  "╕
+   elseif a:chr == b:di_cSdDr  |let ret= 1  "╒
    endif
   endif
 "  call Dret("s:IsDnS ".ret)
@@ -1481,18 +1528,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsDnD: does the character "chr" have a double-line vertical-down? {{{2
 fun! s:IsDnD(chr)
-"  call Dfunc("s:IsDnD(chr<".a:chr.">)")
+"  call Dfunc("s:IsDnD(chr<".a:chr.">) does chr have a dbl-line vert-down?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Dvert  |let ret= 1
-   elseif a:chr == b:di_Dulcorn|let ret= 1
-   elseif a:chr == b:di_Durcorn|let ret= 1
-   elseif a:chr == b:di_Dplus  |let ret= 1
-   elseif a:chr == b:di_Ddnplus|let ret= 1
-   elseif a:chr == b:di_Dlplus |let ret= 1
-   elseif a:chr == b:di_Drplus |let ret= 1
-   elseif a:chr == b:di_cDdSr  |let ret= 1
-   elseif a:chr == b:di_cSlDd  |let ret= 1
+   if     a:chr == b:di_Dvert  |let ret= 1  "║
+   elseif a:chr == b:di_Dulcorn|let ret= 1  "╔
+   elseif a:chr == b:di_Durcorn|let ret= 1  "╗
+   elseif a:chr == b:di_Dplus  |let ret= 1  "╬
+   elseif a:chr == b:di_Ddnplus|let ret= 1  "╦
+   elseif a:chr == b:di_Dlplus |let ret= 1  "╣
+   elseif a:chr == b:di_Drplus |let ret= 1  "╠
+   elseif a:chr == b:di_cDdSr  |let ret= 1  "╓
+   elseif a:chr == b:di_cSlDd  |let ret= 1  "╖
    endif
   endif
 "   call Dret("s:IsDnD ".ret)
@@ -1502,19 +1549,19 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsUpS: does the character "chr" have a single-line vertical-up? {{{2
 fun! s:IsUpS(chr)
-"  call Dfunc("s:IsUpS(chr<".a:chr.">)")
+"  call Dfunc("s:IsUpS(chr<".a:chr.">) does chr have a sngl-line vert-up?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Svert  |let ret= 1
-   elseif a:chr == b:di_Sllcorn|let ret= 1
-   elseif a:chr == b:di_Slrcorn|let ret= 1
-   elseif a:chr == b:di_Splus  |let ret= 1
-   elseif a:chr == b:di_Supplus|let ret= 1
-   elseif a:chr == b:di_Slplus |let ret= 1
-   elseif a:chr == b:di_Srplus |let ret= 1
-   elseif a:chr == b:di_SuDh   |let ret= 1
-   elseif a:chr == b:di_cDrSu  |let ret= 1
-   elseif a:chr == b:di_cDlSu  |let ret= 1
+   if     a:chr == b:di_Svert  |let ret= 1  "│
+   elseif a:chr == b:di_Sllcorn|let ret= 1  "└
+   elseif a:chr == b:di_Slrcorn|let ret= 1  "┘
+   elseif a:chr == b:di_Splus  |let ret= 1  "┼
+   elseif a:chr == b:di_Supplus|let ret= 1  "┴
+   elseif a:chr == b:di_Slplus |let ret= 1  "┤
+   elseif a:chr == b:di_Srplus |let ret= 1  "├
+   elseif a:chr == b:di_SuDh   |let ret= 1  "╧
+   elseif a:chr == b:di_cDrSu  |let ret= 1  "╘
+   elseif a:chr == b:di_cDlSu  |let ret= 1  "╛
    endif
   endif
 "   call Dret("s:IsUpS ".ret)
@@ -1524,18 +1571,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsUpD: does the character "chr" have a double-line vertical-up? {{{2
 fun! s:IsUpD(chr)
-"  call Dfunc("s:IsUpD(chr<".a:chr.">)")
+"  call Dfunc("s:IsUpD(chr<".a:chr.">) does chr have a dbl-line vert-up?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Dvert  |let ret= 1
-   elseif a:chr == b:di_Dllcorn|let ret= 1
-   elseif a:chr == b:di_Dlrcorn|let ret= 1
-   elseif a:chr == b:di_Dplus  |let ret= 1
-   elseif a:chr == b:di_Dupplus|let ret= 1
-   elseif a:chr == b:di_Dlplus |let ret= 1
-   elseif a:chr == b:di_Drplus |let ret= 1
-   elseif a:chr == b:di_cSrDu  |let ret= 1
-   elseif a:chr == b:di_cSlDu  |let ret= 1
+   if     a:chr == b:di_Dvert  |let ret= 1  "║
+   elseif a:chr == b:di_Dllcorn|let ret= 1  "╚
+   elseif a:chr == b:di_Dlrcorn|let ret= 1  "╝
+   elseif a:chr == b:di_Dplus  |let ret= 1  "╬
+   elseif a:chr == b:di_Dupplus|let ret= 1  "╩
+   elseif a:chr == b:di_Dlplus |let ret= 1  "╣
+   elseif a:chr == b:di_Drplus |let ret= 1  "╠
+   elseif a:chr == b:di_cSrDu  |let ret= 1  "╙
+   elseif a:chr == b:di_cSlDu  |let ret= 1  "╜
    endif
   endif
 "  call Dret("s:IsUpD ".ret)
@@ -1545,18 +1592,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsLeftS: does the character "chr" have a single-line horizontal-left? {{{2
 fun! s:IsLeftS(chr)
-"  call Dfunc("s:IsLeftS(chr<".a:chr.">)")
+"  call Dfunc("s:IsLeftS(chr<".a:chr.">) does chr have sngl-line horiz-left?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Shoriz  |let ret= 1
-   elseif a:chr == b:di_Surcorn |let ret= 1
-   elseif a:chr == b:di_Slrcorn |let ret= 1
-   elseif a:chr == b:di_Splus   |let ret= 1
-   elseif a:chr == b:di_Sdnplus |let ret= 1
-   elseif a:chr == b:di_Supplus |let ret= 1
-   elseif a:chr == b:di_Slplus  |let ret= 1
-   elseif a:chr == b:di_cSlDd   |let ret= 1
-   elseif a:chr == b:di_cSlDu   |let ret= 1
+   if     a:chr == b:di_Shoriz  |let ret= 1  "─
+   elseif a:chr == b:di_Surcorn |let ret= 1  "┐
+   elseif a:chr == b:di_Slrcorn |let ret= 1  "┘
+   elseif a:chr == b:di_Splus   |let ret= 1  "┼
+   elseif a:chr == b:di_Sdnplus |let ret= 1  "┬
+   elseif a:chr == b:di_Supplus |let ret= 1  "┴
+   elseif a:chr == b:di_Slplus  |let ret= 1  "┤
+   elseif a:chr == b:di_cSlDd   |let ret= 1  "╖
+   elseif a:chr == b:di_cSlDu   |let ret= 1  "╜
    endif
   endif
 "  call Dret("s:IsLeftS ".ret)
@@ -1566,18 +1613,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsLeftD: does the character "chr" have a double-line horizontal-left? {{{2
 fun! s:IsLeftD(chr)
-"  call Dfunc("s:IsLeftD(chr<".a:chr.">)")
+"  call Dfunc("s:IsLeftD(chr<".a:chr.">) does chr have a dbl-line horiz-left?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Dhoriz  |let ret= 1
-   elseif a:chr == b:di_Durcorn |let ret= 1
-   elseif a:chr == b:di_Dlrcorn |let ret= 1
-   elseif a:chr == b:di_Dplus   |let ret= 1
-   elseif a:chr == b:di_Ddnplus |let ret= 1
-   elseif a:chr == b:di_Dupplus |let ret= 1
-   elseif a:chr == b:di_Dlplus  |let ret= 1
-   elseif a:chr == b:di_cDlSd   |let ret= 1
-   elseif a:chr == b:di_cDlSu   |let ret= 1
+   if     a:chr == b:di_Dhoriz  |let ret= 1  "═
+   elseif a:chr == b:di_Durcorn |let ret= 1  "╗
+   elseif a:chr == b:di_Dlrcorn |let ret= 1  "╝
+   elseif a:chr == b:di_Dplus   |let ret= 1  "╬
+   elseif a:chr == b:di_Ddnplus |let ret= 1  "╦
+   elseif a:chr == b:di_Dupplus |let ret= 1  "╩
+   elseif a:chr == b:di_Dlplus  |let ret= 1  "╣
+   elseif a:chr == b:di_cDlSd   |let ret= 1  "╕
+   elseif a:chr == b:di_cDlSu   |let ret= 1  "╛
    endif
   endif
 "  call Dret("s:IsLeftD ".ret)
@@ -1587,18 +1634,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsRightS: does the character "chr" have a single-line horizontal-right? {{{2
 fun! s:IsRightS(chr)
-"  call Dfunc("s:IsRightS(chr<".a:chr.">)")
+"  call Dfunc("s:IsRightS(chr<".a:chr.">) does chr have a sngl-line horiz-right?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Shoriz  |let ret= 1
-   elseif a:chr == b:di_Sulcorn |let ret= 1
-   elseif a:chr == b:di_Sllcorn |let ret= 1
-   elseif a:chr == b:di_Splus   |let ret= 1
-   elseif a:chr == b:di_Sdnplus |let ret= 1
-   elseif a:chr == b:di_Supplus |let ret= 1
-   elseif a:chr == b:di_Srplus  |let ret= 1
-   elseif a:chr == b:di_cDdSr   |let ret= 1
-   elseif a:chr == b:di_cSrDu   |let ret= 1
+   if     a:chr == b:di_Shoriz  |let ret= 1  "─
+   elseif a:chr == b:di_Sulcorn |let ret= 1  "┌
+   elseif a:chr == b:di_Sllcorn |let ret= 1  "└
+   elseif a:chr == b:di_Splus   |let ret= 1  "┼
+   elseif a:chr == b:di_Sdnplus |let ret= 1  "┬
+   elseif a:chr == b:di_Supplus |let ret= 1  "┴
+   elseif a:chr == b:di_Srplus  |let ret= 1  "├
+   elseif a:chr == b:di_cDdSr   |let ret= 1  "╓
+   elseif a:chr == b:di_cSrDu   |let ret= 1  "╙
    endif
   endif
 "  call Dret("s:IsRightS ".ret)
@@ -1608,18 +1655,18 @@ endfun
 " ---------------------------------------------------------------------
 " s:IsRightD: does the character "chr" have a double-line horizontal-right? {{{2
 fun! s:IsRightD(chr)
-"  call Dfunc("s:IsRightD(chr<".a:chr.">)")
+"  call Dfunc("s:IsRightD(chr<".a:chr.">) does chr have a dbl-line horiz-right?")
   let ret= 0
   if b:di_gfxchr
-   if     a:chr == b:di_Dhoriz  |let ret= 1
-   elseif a:chr == b:di_Dulcorn |let ret= 1
-   elseif a:chr == b:di_Dllcorn |let ret= 1
-   elseif a:chr == b:di_Dplus   |let ret= 1
-   elseif a:chr == b:di_Ddnplus |let ret= 1
-   elseif a:chr == b:di_Dupplus |let ret= 1
-   elseif a:chr == b:di_Drplus  |let ret= 1
-   elseif a:chr == b:di_cSdDr   |let ret= 1
-   elseif a:chr == b:di_cDrSu   |let ret= 1
+   if     a:chr == b:di_Dhoriz  |let ret= 1  "═
+   elseif a:chr == b:di_Dulcorn |let ret= 1  "╔
+   elseif a:chr == b:di_Dllcorn |let ret= 1  "╚
+   elseif a:chr == b:di_Dplus   |let ret= 1  "╬
+   elseif a:chr == b:di_Ddnplus |let ret= 1  "╦
+   elseif a:chr == b:di_Dupplus |let ret= 1  "╩
+   elseif a:chr == b:di_Drplus  |let ret= 1  "╠
+   elseif a:chr == b:di_cSdDr   |let ret= 1  "╒
+   elseif a:chr == b:di_cDrSu   |let ret= 1  "╘
    endif
   endif
 "  call Dret("s:IsRightD ".ret)
@@ -2377,12 +2424,9 @@ fun! s:AutoCanvas(linestart,linestop,cols)
   exe a:linestart.",".a:linestop."retab"
   let &l:et= etkeep
 
-  " insure that there's whitespace to textwidth/screenwidth/a:cols
+  " insure that there's whitespace to a:cols/window-width/screenwidth/textwidth
   if a:cols <= 0
-   let tw= &tw
-   if tw <= 0
-    let tw= &columns
-   endif
+   let tw= s:GetWinWidth()
   else
    let tw= a:cols
   endif
@@ -2440,6 +2484,67 @@ fun! s:Strlen(x)
   return ret
 endfun
 
+" ---------------------------------------------------------------------
+" s:ToggleGrid: toggle presence of a grid drawn with colorcolumns and matchadd {{{2
+"  Original Author:	ib from stackoverflow
+"  Modified By:		Charles E Campbell
+fun! s:ToggleGrid(...)
+"  call Dfunc("s:ToggleGrid(...) a:0=".a:0)
+  " if matchadd() doesn't exist, can't do this
+  if !exists("*matchadd")
+   echohl WarningMsg
+   echo "***warning*** your vim doesn't support matchadd(), so it can't make grids"
+   echohl None
+"   call Dret("s:ToggleGrid : this vim doesn't support matchadd()")
+   return
+  endif
+
+  " toggle grid
+  if exists('b:grid_row_grp') || exists('b:grid_prev_cc')
+   call matchdelete(b:grid_row_grp)
+   let &colorcolumn = b:grid_prev_cc
+   unlet b:grid_row_grp b:grid_prev_cc
+"   call Dret("s:ToggleGrid : turned grid off")
+   return
+  endif
+
+  if a:0 == 0
+   if !exists("s:lastdr")
+	let s:lastdr= 10
+   endif
+   if !exists("s:lastdc")
+	let s:lastdc= 10
+   endif
+   let [dr,dc] = [s:lastdr,s:lastdc]
+  elseif a:0 == 1
+   let [dr,dc] = [a:1,s:lastdc]
+  else
+   let [dr, dc] = [a:1, a:2]
+  endif
+  let s:lastdr = dr
+  let s:lastdc = dc
+
+  if a:0 < 4
+   let [i, nr, nc] = [1, line('$'), 0]
+   while i <= nr
+    let k  = virtcol('$')
+    let nc = nc < k ? k : nc
+    let i += 1
+   endwhile
+  else
+   let [nr, nc] = [a:3, a:4]
+  endif
+  let rows = range(dr, nr, dr)
+  let cols = range(dc, nc, dc)
+
+  let pat            = '\V' . join(map(rows, '"\\%" . v:val . "l"'), '\|')
+  let b:grid_row_grp = matchadd('ColorColumn', pat)
+  let b:grid_prev_cc = &colorcolumn
+  let &colorcolumn   = join(cols, ',')
+
+"  call Dret("s:ToggleGrid : turned grid on with dr=".dr." dc=".dc)
+endfun
+
 " =====================================================================
 "  DrawIt Functions: (by Sylvain Viart) {{{1
 " =====================================================================
@@ -2470,10 +2575,7 @@ fun! s:Spacer(debut, fin, cols) range
   call s:SavePosn()
 
   if a:cols <= 0
-   let width = &textwidth
-   if width <= 0
-    let width= &columns
-   endif
+   let width= s:GetWinWidth()
   else
    let width= a:cols
   endif
@@ -2492,7 +2594,7 @@ endf
 " ---------------------------------------------------------------------
 " s:CallBox: call the specified function using the current visual selection box {{{2
 fun! s:CallBox(func_name) range
-  "  call Dfunc("s:CallBox(func_name<".a:func_name.">)")
+"  "  call Dfunc("s:CallBox(func_name<".a:func_name.">)")
 
   if exists("b:xmouse_start")
    let xdep = b:xmouse_start
@@ -2768,6 +2870,24 @@ fun! s:DrawPlainLine(x0,y0,x1,y1)
 "  call Dret("s:DrawPlainLine")
 endf
 
+" ---------------------------------------------------------------------
+" s:GetWinWidth: returns amount of usable window width, in columns {{{2
+fun! s:GetWinWidth()
+"  call Dfunc("s:GetWinWidth()")
+  let curcol= col(".")
+  norm! g$
+  let winr= wincol()
+  norm! g0
+  let winl= wincol()
+  exe "sil! ".curcol."|"
+  let width= winr - winl + 1
+  if width <= 0
+   let width= &columns
+  endif
+"  call Dret("s:GetWinWidth ".width)
+  return width
+endfun
+
 " =====================================================================
 "  Mouse Functions: {{{1
 " =====================================================================
@@ -2879,11 +2999,11 @@ fun! s:CLeftDrag()
   let curline= line(".")
   call s:AutoCanvas(curline,curline + s:cleft_height,virtcol(".")+s:cleft_width)
   if s:cleft_width > 0 && s:cleft_height > 0
-   exe "silent! norm! \<c-v>".s:cleft_width."l".s:cleft_height.'j"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_width."l".s:cleft_height.'j"'.b:drawit_brush.'y'
   elseif s:cleft_width > 0
-   exe "silent! norm! \<c-v>".s:cleft_width.'l"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_width.'l"'.b:drawit_brush.'y'
   else
-   exe "silent! norm! \<c-v>".s:cleft_height.'j"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_height.'j"'.b:drawit_brush.'y'
   endif
   exe "let s:cleft_oldblock= @".b:drawit_brush
 "  call Decho("s:cleft_oldblock=@".b:drawit_brush)
